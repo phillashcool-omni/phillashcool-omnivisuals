@@ -1,0 +1,17 @@
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
+{% include 'main/navbar.html' %}
+
+<section class="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-6 py-24" style="background: radial-gradient(ellipse at 30% 20%, rgba(236,72,153,0.15), transparent 50%), radial-gradient(ellipse at center, #1e1b4b 0%, #0c0a1f 45%, #000000 100%);">
+    <div class="stars-bg"></div>
+
+           <h1 class="relative z-10 text-7xl sm:text-9xl mb-8 moving-gradient-text" style="font-family: 'Algerian', 'Archivo Black', sans-serif;">
+        ABOUT US
+    </h1>
+    <p class="relative z-10 text-gray-100 max-w-2xl text-lg sm:text-xl leading-relaxed" style="font-family: 'Poppins', sans-serif;">
+        We are   <span class="font-semibold moving-gradient-text">Phillashcool OmniVisuals</span> — a creative studio built on one belief: every imagination deserves to become something real. We don't just create content, we craft experiences. Every project we touch is treated as a story waiting to be told, brought to life through design, motion, and vision that refuses to blend in. This is more than visuals — this is imagination, made real.
+    </p>
+</section>
