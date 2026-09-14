@@ -2,15 +2,36 @@
 <nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 sm:px-12 py-4 bg-transparent">
           <img src="{% static 'images/phillashcool-text.png' %}" alt="Phillashcool" class="h-6 sm:h-8">
     <button id="menu-btn" class="sm:hidden text-white text-2xl">☰</button>
-        <div id="mobile-menu" class="hidden sm:flex flex-col sm:flex-row gap-3 text-gray-300 text-sm tracking-widest uppercase max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-full max-sm:bg-black/80 max-sm:backdrop-blur-md max-sm:p-6" style="font-family: 'Poppins', sans-serif;">
-        <a href="/" class="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Home</a>
-        <a href="/about/" class="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">About</a>
-        <a href="/services/" class="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Services</a>
-        <a href="/contact/" class="px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Contact</a>
-    </div>
+                    <div id="mobile-menu" class="hidden sm:flex flex-col sm:flex-row gap-3 text-gray-300 text-sm tracking-widest uppercase max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:h-full max-sm:w-64 max-sm:bg-transparent max-sm:pt-20 max-sm:pl-4 max-sm:pr-8 max-sm:justify-start max-sm:items-start" style="font-family: 'Poppins', sans-serif;">
+               <a href="/" class="mobile-menu-link px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Home</a>
+        <a href="/about/" class="mobile-menu-link px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">About</a>
+        <a href="/services/" class="mobile-menu-link px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Services</a>
+        <a href="/contact/" class="mobile-menu-link px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:text-blue-400 transition">Contact</a>
 </nav>
 <script>
 document.getElementById('menu-btn').addEventListener('click', function() {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
+    const menu = document.getElementById('mobile-menu');
+    const isHidden = menu.classList.contains('hidden');
+    const links = menu.querySelectorAll('.mobile-menu-link');
+    if (isHidden) {
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+        links.forEach(function(link) {
+            link.classList.remove('menu-animate-out');
+            link.classList.remove('menu-animate');
+            void link.offsetWidth;
+            link.classList.add('menu-animate');
+        });
+    } else {
+        links.forEach(function(link) {
+            link.classList.remove('menu-animate');
+            void link.offsetWidth;
+            link.classList.add('menu-animate-out');
+        });
+        setTimeout(function() {
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+        }, 450);
+    }
 });
 </script>
