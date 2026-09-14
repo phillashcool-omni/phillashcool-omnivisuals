@@ -113,9 +113,12 @@
   10% { opacity: 0; transform: translate(-120vw, -60px) rotate(-15deg); }
   100% { opacity: 0; }
 }
-.mobile-menu-link {
-  opacity: 0;
+@media (max-width: 639px) {
+  .mobile-menu-link {
+    opacity: 0;
+  }
 }
+
 .mobile-menu-link.menu-animate {
   animation: menu-item-in 0.4s ease forwards;
 }
