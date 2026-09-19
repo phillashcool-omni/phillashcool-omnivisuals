@@ -35,4 +35,72 @@ document.getElementById('menu-btn').addEventListener('click', function() {
     }
 });
 </script>
-<script src="//code.tidio.co/a5ijg0v09xmcwpmh1atodkuigcayofr1.js" async></script>
+<script>
+(function() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes sparkle-fade {
+            0% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: scale(0.1) translateY(-30px) rotate(180deg); }
+        }
+        .sparkle-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 30;
+            animation: sparkle-fade 0.9s ease-out forwards;
+        }
+    `;
+    document.head.appendChild(style);
+
+    const colors = ['#60a5fa', '#a855f7', '#ec4899', '#fb923c'];
+    let colorIndex = 0;
+    let lastSpawn = 0;
+    let lastColorChange = 0;
+
+    function spawnSparkle(x, y) {
+        const color = colors[colorIndex];
+        const size = 4 + Math.random() * 6;
+        const offsetX = (Math.random() - 0.5) * 24;
+        const offsetY = (Math.random() - 0.5) * 24;
+
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle-particle';
+        sparkle.style.left = (x + offsetX) + 'px';
+        sparkle.style.top = (y + offsetY) + 'px';
+        sparkle.style.width = size + 'px';
+        sparkle.style.height = size + 'px';
+                sparkle.style.background = color;
+        sparkle.style.borderRadius = '50%';
+        sparkle.style.boxShadow = `0 0 ${size * 2}px ${size / 2}px ${color}`;
+        sparkle.style.opacity = '0.2';
+        sparkle.style.mixBlendMode = 'screen';
+
+        document.body.appendChild(sparkle);
+        setTimeout(function() {
+            sparkle.remove();
+        }, 900);
+    }
+
+    function handleMove(x, y) {
+        const now = Date.now();
+        if (now - lastSpawn > 40) {
+            spawnSparkle(x, y);
+            spawnSparkle(x, y);
+            lastSpawn = now;
+        }
+        if (now - lastColorChange > 250) {
+            colorIndex = (colorIndex + 1) % colors.length;
+            lastColorChange = now;
+        }
+    }
+
+    document.addEventListener('mousemove', function(e) {
+        handleMove(e.clientX, e.clientY);
+    });
+    document.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 0) {
+            handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
+})();
+</script>
